@@ -5,12 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SelfieAWookie.Core.Domain;
+using SelfiesAWookie.Core.Infrastructure.Data;
 using SelfiesAWookie.Core.Infrastructure.Selfies;
 using SelfiesAWookie.Core.Infrastructure.Wookies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace MonSelfieAWookie
 {
@@ -28,11 +30,15 @@ namespace MonSelfieAWookie
         {
             services.AddControllersWithViews();
 
-            
+            string connectionString = this.Configuration.GetConnectionString("MaBaseDeDonneesDeSelfies");
+
+            services.AddDbContext<SelfieAWookieDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
 
             services.AddScoped<IWookieRepository, MemoryWookieRepository>();
             services.AddScoped<ISelfieRepository, DbSelfiesRepository>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
