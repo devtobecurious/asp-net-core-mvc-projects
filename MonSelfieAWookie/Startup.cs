@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SelfieAWookie.Core.Domain;
+using SelfiesAWookie.Core.Infrastructure.Selfies;
 using SelfiesAWookie.Core.Infrastructure.Wookies;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace MonSelfieAWookie
             services.AddControllersWithViews();
 
             services.AddScoped<IWookieRepository, MemoryWookieRepository>();
+            services.AddScoped<ISelfieRepository, InMemorySelfiesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +56,7 @@ namespace MonSelfieAWookie
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Wookie}/{action=Index}/{id?}");
+                    pattern: "{controller=Selfie}/{action=Index}/{id?}");
             });
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SelfieAWookie.Core.Domain
 {
-    public interface IWookieRepository : IMainRepository<Wookie>
+    public interface ISelfieRepository : IMainRepository<Selfie>
     {
     }
 }
