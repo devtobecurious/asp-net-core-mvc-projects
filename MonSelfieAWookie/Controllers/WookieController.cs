@@ -10,27 +10,23 @@ namespace MonSelfieAWookie.Controllers
 {
     public class WookieController : Controller
     {
+        #region Fields
+        private readonly IWookieRepository _repository = null;
+        #endregion
+
+        #region Constructors
+        public WookieController(IWookieRepository repository)
+        {
+            this._repository = repository;
+        }
+        #endregion
+
         #region Public methods
         public IActionResult Index()
         {
-            List<Wookie> wookies = new List<Wookie>()
-            {
-                new Wookie() { Id = 1, Surname = "Chewie", MainWeapon = new Weapon() { Id = 1, Label = "Blaster" }},
-                new Wookie() 
-                { 
-                    Id = 1, 
-                    Surname = "Chewie", 
-                    MainWeapon = new Weapon() { Id = 1, Label = "Blaster" },
-                    Selfies = new List<Selfie>()
-                    {
-                        new Selfie()
-                    }
-                }
-            };
-
             return View(new Models.WookiesIndexViewModel()
             {
-                Wookies = wookies.Convert()
+                Wookies = this._repository.GetAll().ToList().Convert()
             });
         }
         #endregion
