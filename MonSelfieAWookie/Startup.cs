@@ -28,8 +28,11 @@ namespace MonSelfieAWookie
         {
             services.AddControllersWithViews();
 
+            
+
             services.AddScoped<IWookieRepository, MemoryWookieRepository>();
-            services.AddScoped<ISelfieRepository, InMemorySelfiesRepository>();
+            services.AddScoped<ISelfieRepository, DbSelfiesRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
