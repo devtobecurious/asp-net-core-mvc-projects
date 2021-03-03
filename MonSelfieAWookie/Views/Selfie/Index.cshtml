@@ -1,0 +1,53 @@
+﻿@model SelfiesIndexViewModel
+
+@{
+    ViewData["Title"] = "Selfies list";
+
+    //bool afficherImage = true;
+
+    //List<Weapon> weaponList = this.ViewBag.WeaponList;
+}
+
+<style>
+    h1 {
+        font-size: 50px;
+    }
+</style>
+
+<h1>Les selfies</h1>
+    <div class="row">
+        <div class="col-sm">
+            
+        </div>
+        <div class="col-sm">
+            <h2>Filtres</h2>
+
+            <form method="post">
+                <select name="WeaponId">
+                    @foreach (var item in Model.Weapons)
+                    {
+                        <option value="@item.Id">@item.Label</option>
+                    }
+                </select>
+            </form>
+            <h2>Liste</h2>
+            <ul>
+                @foreach (var item in Model.Selfies)
+                {
+                    <li>
+                        Un selfie
+                        @if (true)
+                        {
+                            <img src="@item.ImageUrl" alt="Alternate Text" />
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-sm">
+            
+        </div>
+    </div>
+
+
+
