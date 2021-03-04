@@ -25,7 +25,14 @@ namespace SelfiesAWookie.Core.Infrastructure.Wookies
         #region Public methods
         public IList<Wookie> GetAll()
         {
-            return this._context.Wookies.Include(item => item.MainWeapon).ToList();
+            return this._context.Wookies.AsNoTracking().Include(item => item.MainWeapon)
+                                                       .Include(item => item.Selfies).ToList();
+        }
+
+        public async Task<IList<Wookie>> GetAllAsync()
+        {
+            return await this._context.Wookies.AsNoTracking().Include(item => item.MainWeapon)
+                                                             .Include(item => item.Selfies).ToListAsync();
         }
         #endregion
     }

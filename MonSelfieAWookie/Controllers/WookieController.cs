@@ -22,12 +22,22 @@ namespace MonSelfieAWookie.Controllers
         #endregion
 
         #region Public methods
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(new Models.WookiesIndexViewModel()
+            var result = await this._repository.GetAllAsync();
+            var wookiesDto = result.ToList().Convert();
+
+            return View("SuperIndex3", new Models.WookiesIndexViewModel()
             {
-                Wookies = this._repository.GetAll().ToList().Convert()
+                Wookies = wookiesDto
             });
+        }
+
+        public IActionResult WookiesAsJson()
+        {
+            // return this.BadRequest();
+
+            return this.Json(this._repository.GetAll().ToList().Convert());
         }
         #endregion
     }

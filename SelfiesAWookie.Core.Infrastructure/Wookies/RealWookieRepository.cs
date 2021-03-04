@@ -13,5 +13,10 @@ namespace SelfiesAWookie.Core.Infrastructure.Wookies
         {
             throw new NotImplementedException();
         }
+
+        public Task<IList<Wookie>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

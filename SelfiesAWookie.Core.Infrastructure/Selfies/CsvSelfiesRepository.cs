@@ -14,6 +14,11 @@ namespace SelfiesAWookie.Core.Infrastructure.Selfies
         {
             throw new NotImplementedException("to be continued ;)");
         }
+
+        public Task<IList<Selfie>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

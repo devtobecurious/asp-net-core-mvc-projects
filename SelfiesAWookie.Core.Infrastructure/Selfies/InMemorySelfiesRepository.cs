@@ -14,6 +14,11 @@ namespace SelfiesAWookie.Core.Infrastructure.Selfies
         {
             return new List<Selfie>();
         }
+
+        public Task<IList<Selfie>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

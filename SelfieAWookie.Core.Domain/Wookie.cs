@@ -13,6 +13,8 @@ namespace SelfieAWookie.Core.Domain
 
         public string Surname { get; set; }
 
+        public string AvatarUrl { get; set; }
+
         public List<Selfie> Selfies { get; set; }
 
         public Weapon MainWeapon { get; set; }

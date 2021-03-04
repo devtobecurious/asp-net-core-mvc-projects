@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MonSelfieAWookie.Controllers;
 using MonSelfieAWookie.Models;
 using MonSelfieAWookie.Models.Dtos;
 using SelfieAWookie.Core.Domain;
+using SelfiesAWookie.Core.Infrastructure.Data;
+using SelfiesAWookie.Core.Infrastructure.Wookies;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace SelfieAWookie.Tests.Web
@@ -30,17 +34,44 @@ namespace SelfieAWookie.Tests.Web
 
             return wookies;
         }
+
+        public Task<IList<Wookie>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class WookieControllerUnitTest
     {
+        public WookieControllerUnitTest()
+        {
+
+        }
+
         #region Public methods
         [Fact]
         public void ShouldReturnListOfWookies()
         {
-            IWookieRepository repository = new FakeRepository();
-
             // Arrange => je prépare
+            DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
+            builder.UseInMemoryDatabase("SelfieAWookie");
+
+            using SelfieAWookieDbContext context = new SelfieAWookieDbContext(builder.Options);
+
+            context.Wookies.Add(new Wookie()
+            {
+                Id = 1,
+            });
+
+            context.Wookies.Add(new Wookie()
+            {
+                Id = 2,
+            });
+            context.SaveChanges();
+
+            IWookieRepository repository = new DbWookiesRepository(context);
+
+            
             WookieController controller = new WookieController(repository);
 
             // Act => je lance ma méthode, mon code à tester

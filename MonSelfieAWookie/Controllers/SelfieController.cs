@@ -22,7 +22,7 @@ namespace MonSelfieAWookie.Controllers
         #endregion
 
         #region Public methods
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             List<Weapon> weaponList = new List<Weapon>()
             {
