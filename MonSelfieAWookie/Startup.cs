@@ -37,7 +37,7 @@ namespace MonSelfieAWookie
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddScoped<IWookieRepository, MemoryWookieRepository>();
+            services.AddScoped<IWookieRepository, DbWookiesRepository>();
             services.AddScoped<ISelfieRepository, DbSelfiesRepository>();
         }
 
@@ -65,7 +65,7 @@ namespace MonSelfieAWookie
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Selfie}/{action=Index}/{id?}");
+                    pattern: "{controller=Wookie}/{action=Index}/{id?}");
             });
         }
     }
