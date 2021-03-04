@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MonSelfieAWookie.Models;
+using MonSelfieAWookie.Models.Dtos;
 using SelfieAWookie.Core.Domain;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace MonSelfieAWookie.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromQuery] string image, string[] titre, string[] humeur)
+        public async Task<IActionResult> Create(Selfie selfie)
         {
             return this.View();
         }
