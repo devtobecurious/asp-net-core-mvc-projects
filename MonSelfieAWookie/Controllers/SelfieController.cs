@@ -22,6 +22,18 @@ namespace MonSelfieAWookie.Controllers
         #endregion
 
         #region Public methods
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromQuery] string image, string[] titre, string[] humeur)
+        {
+            return this.View();
+        }
+
         public async Task<IActionResult> Index()
         {
             List<Weapon> weaponList = new List<Weapon>()
