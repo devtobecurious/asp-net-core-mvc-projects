@@ -17,6 +17,8 @@ namespace SelfiesAWookie.Core.Infrastructure.Data.EntityConfigurations
             builder.ToTable("Wookie");
             builder.HasKey(item => item.Id);
 
+            builder.Property(item => item.Surname).IsRequired(true);
+
             builder.Ignore(item => item.HelpsWeapons);
         }
         #endregion

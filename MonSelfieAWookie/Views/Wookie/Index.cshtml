@@ -10,42 +10,47 @@
     }
 </style>
 
-<h1>Les wookies</h1>
-    <div class="row">
-        <div class="col-sm">
-            
-        </div>
-        <div class="col-sm">
-            <h2>Filtres</h2>
-
-            
-            <h2>Liste</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Prénom</th>
-                        <th scope="col">Arme de préférence</th>
-                        <th scope="col">Nb armes auxiliaires</th>
-                        <th scope="col">Nb selfies</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var wookie in Model.Wookies)
-                    {
-                        <tr>
-                            <th scope="row">@wookie.Surname</th>
-                            <td>@wookie.MainWeaponLabel</td>
-                            <td>@wookie.AuxiliaryWeaponsNumber</td>
-                            <td>@wookie.SelfiesNumber</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm">
-            
-        </div>
+<environment exclude="Production">
+    <div style="background-color:darkred; color: white; font-size: 30px; font-style:italic; font-weight:bold">
+        en test ici
     </div>
+</environment>
+<h1>Les wookies</h1>
+<div class="row">
+    <div class="col-sm">
+
+    </div>
+    <div class="col-sm">
+        <h2>Filtres</h2>
+
+
+        <h2>Liste</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Arme de préférence</th>
+                    <th scope="col">Nb armes auxiliaires</th>
+                    <th scope="col">Nb selfies</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var wookie in Model.Wookies)
+                {
+                    <tr>
+                        <th scope="row">@wookie.Surname</th>
+                        <td>@wookie.MainWeaponLabel</td>
+                        <td>@wookie.AuxiliaryWeaponsNumber</td>
+                        <td>@wookie.SelfiesNumber</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm">
+
+    </div>
+</div>
 
 
 

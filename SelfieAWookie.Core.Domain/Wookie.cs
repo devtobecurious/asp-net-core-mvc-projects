@@ -13,6 +13,7 @@ namespace SelfieAWookie.Core.Domain
         public int Id { get; set; }
 
         [Display(Name = "Prénom")] // A ne pas faire d'un point de vue architecturale => pollution du domain
+        [Required]
         public string Surname { get; set; }
 
         public string AvatarUrl { get; set; }

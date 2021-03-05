@@ -45,6 +45,12 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+
+        <environment exclude="Production">
+            <div style="background-color:darkred; color: white; font-size: 30px; font-style:italic; font-weight:bold">
+                en test
+            </div>
+        </environment>
     </div>
 
     <footer class="border-top footer text-muted">

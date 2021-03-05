@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SelfiesAWookie.Core.Infrastructure.Weapons;
+using MonSelfieAWookie.Tools;
+using MonSelfieAWookie.Models.Dtos;
 
 namespace MonSelfieAWookie
 {
@@ -38,15 +40,16 @@ namespace MonSelfieAWookie
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddScoped<IWookieRepository, DbWookiesRepository>();
-            services.AddScoped<ISelfieRepository, DbSelfiesRepository>();
-            services.AddScoped<IWeaponRepository, DbWeaponsRepository>();
+            services.Configure<SecurityItem>(this.Configuration.GetSection("SecurityKey"));
+            // services.Configure<SecurityItem>(this.Configuration.GetSection("SecurityKey2"));
+
+            services.AddCustomDI();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() && env.IsEnvironment("preprod"))
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -62,13 +65,8 @@ namespace MonSelfieAWookie
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseAuthentication();
+            app.UseCustomRoutes();
         }
     }
 }

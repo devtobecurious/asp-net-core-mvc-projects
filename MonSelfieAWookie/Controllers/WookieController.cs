@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MonSelfieAWookie.Models.Dtos;
 using MonSelfieAWookie.Tools;
 using SelfieAWookie.Core.Domain;
 using System;
@@ -13,21 +18,26 @@ namespace MonSelfieAWookie.Controllers
         #region Fields
         private readonly IWookieRepository _repository = null;
         private readonly IWeaponRepository _weaponRepository = null;
+        private readonly ILogger<WookieController> _logger = null;
         #endregion
 
         #region Constructors
-        public WookieController(IWookieRepository repository, IWeaponRepository weaponRepository)
+        public WookieController(ILogger<WookieController> logger, IWookieRepository repository, IWeaponRepository weaponRepository, IWebHostEnvironment env, IOptions<SecurityItem> options)
         {
             this._repository = repository;
             this._weaponRepository = weaponRepository;
+            this._logger = logger;
         }
         #endregion
 
         #region Public methods
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id, string libelle)
         {
+            this._logger.LogInformation("Ah que coucou, index");
+
             var result = await this._repository.GetAllAsync();
             var wookiesDto = result.ToList().Convert();
+
 
             return View("SuperIndex3", new Models.WookiesIndexViewModel()
             {
@@ -53,10 +63,12 @@ namespace MonSelfieAWookie.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Wookie wookie)
+        public async Task<IActionResult> Create(WookieDto wookie)
         {
-            await this._repository.SaveOne(wookie);
-
+            if (this.ModelState.IsValid)
+            {
+                await this._repository.SaveOne(wookie.Item);
+            }
             return await Task.FromResult(this.View(wookie));
         }
         #endregion

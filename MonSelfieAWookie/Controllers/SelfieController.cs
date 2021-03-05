@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MonSelfieAWookie.Models;
 using MonSelfieAWookie.Models.Dtos;
 using SelfieAWookie.Core.Domain;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace MonSelfieAWookie.Controllers
 {
+    [Authorize()]
     public class SelfieController : Controller
     {
         #region Fields
