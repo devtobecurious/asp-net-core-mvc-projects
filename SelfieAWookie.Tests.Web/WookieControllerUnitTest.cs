@@ -39,6 +39,11 @@ namespace SelfieAWookie.Tests.Web
         {
             throw new NotImplementedException();
         }
+
+        public Task SaveOne(Wookie item)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class WookieControllerUnitTest
@@ -75,7 +80,7 @@ namespace SelfieAWookie.Tests.Web
             WookieController controller = new WookieController(repository);
 
             // Act => je lance ma méthode, mon code à tester
-            IActionResult result = controller.Index();
+            IActionResult result = null; // controller.Index();
 
             // Assert => je vérifie
             // Assert.IsType(typeof(ViewResult), result);

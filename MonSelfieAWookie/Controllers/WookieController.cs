@@ -12,12 +12,14 @@ namespace MonSelfieAWookie.Controllers
     {
         #region Fields
         private readonly IWookieRepository _repository = null;
+        private readonly IWeaponRepository _weaponRepository = null;
         #endregion
 
         #region Constructors
-        public WookieController(IWookieRepository repository)
+        public WookieController(IWookieRepository repository, IWeaponRepository weaponRepository)
         {
             this._repository = repository;
+            this._weaponRepository = weaponRepository;
         }
         #endregion
 
@@ -38,6 +40,24 @@ namespace MonSelfieAWookie.Controllers
             // return this.BadRequest();
 
             return this.Json(this._repository.GetAll().ToList().Convert());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            this.ViewBag.WeaponList = await this._weaponRepository.GetAllAsync();
+
+            //return await Task.FromResult(this.View());
+
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Wookie wookie)
+        {
+            await this._repository.SaveOne(wookie);
+
+            return await Task.FromResult(this.View(wookie));
         }
         #endregion
     }

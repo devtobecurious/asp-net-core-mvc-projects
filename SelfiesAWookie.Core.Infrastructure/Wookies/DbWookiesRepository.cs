@@ -34,6 +34,16 @@ namespace SelfiesAWookie.Core.Infrastructure.Wookies
             return await this._context.Wookies.AsNoTracking().Include(item => item.MainWeapon)
                                                              .Include(item => item.Selfies).ToListAsync();
         }
+
+        public async Task SaveOne(Wookie item)
+        {
+            this._context.Wookies.Add(item);
+            this._context.Entry(item.MainWeapon).State = EntityState.Detached;
+
+            // this._context.Entry(item.MainWeapon).Property(item => item.Label).IsModified
+
+            await this._context.SaveChangesAsync();
+        }
         #endregion
     }
 }

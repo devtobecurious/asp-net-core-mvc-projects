@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SelfiesAWookie.Core.Infrastructure.Weapons;
 
 namespace MonSelfieAWookie
 {
@@ -39,6 +40,7 @@ namespace MonSelfieAWookie
 
             services.AddScoped<IWookieRepository, DbWookiesRepository>();
             services.AddScoped<ISelfieRepository, DbSelfiesRepository>();
+            services.AddScoped<IWeaponRepository, DbWeaponsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

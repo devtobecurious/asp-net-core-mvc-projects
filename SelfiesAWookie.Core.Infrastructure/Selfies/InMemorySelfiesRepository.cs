@@ -19,6 +19,11 @@ namespace SelfiesAWookie.Core.Infrastructure.Selfies
         {
             throw new NotImplementedException();
         }
+
+        public Task SaveOne(Selfie item)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

@@ -33,5 +33,10 @@ namespace SelfiesAWookie.Core.Infrastructure.Wookies
         {
             throw new NotImplementedException();
         }
+
+        public Task SaveOne(Wookie item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

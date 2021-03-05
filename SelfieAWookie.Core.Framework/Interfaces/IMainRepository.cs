@@ -10,5 +10,7 @@ namespace SelfieAWookie.Core.Framework.Interfaces
         IList<TObject> GetAll();
 
         Task<IList<TObject>> GetAllAsync();
+
+        Task SaveOne(TObject item);
     }
 }

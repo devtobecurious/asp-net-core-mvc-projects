@@ -1,0 +1,40 @@
+﻿@model Wookie
+
+@{ 
+    List<Weapon> weapons = this.ViewBag.WeaponList;
+    IList<SelectListItem> weaponItems = weapons.Select(item => new SelectListItem() { Text = item.Label, Value = item.Id.ToString() }).ToList(); // a mettre dans un viewmodel
+}
+
+
+<form asp-action="Create" asp-controller="Wookie">
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                @Html.LabelFor(item => item.Surname, new { height = "18px", @class = "form-label" })
+
+                <input asp-for="Surname" class="form-control" />
+                @*@Html.EditorFor(item => item.Surname, new { @class = "form-control", title = "Ton prénom" })*@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="form-label">Arme principale</label>
+            <select name="MainWeapon.Id">
+                @foreach (var weapon in weapons)
+                {
+                    <option value="@weapon.Id">@(weapon.Label + "....")</option>
+                }
+            </select>
+
+            <select asp-for="MainWeapon.Id" asp-items="weaponItems"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="submit" value="Ajouter" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
+

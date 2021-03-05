@@ -1,4 +1,5 @@
 ﻿using SelfieAWookie.Core.Domain;
+using Microsoft.EntityFrameworkCore;
 using SelfiesAWookie.Core.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -6,36 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SelfiesAWookie.Core.Infrastructure.Selfies
+namespace SelfiesAWookie.Core.Infrastructure.Weapons
 {
-    public class DbSelfiesRepository : ISelfieRepository
+    public class DbWeaponsRepository : IWeaponRepository
     {
         #region Fields
         private readonly SelfieAWookieDbContext _context = null;
         #endregion
 
         #region Constructors
-        public DbSelfiesRepository(SelfieAWookieDbContext context)
+        public DbWeaponsRepository(SelfieAWookieDbContext context)
         {
             this._context = context;
         }
         #endregion
 
         #region Public methods
-        public IList<Selfie> GetAll()
+        public IList<Weapon> GetAll()
         {
-            var query = from selfie in this._context.Selfies
-                        select selfie;
-
-            return query.ToList();
+            return this._context.Weapons.ToList();
         }
 
-        public Task<IList<Selfie>> GetAllAsync()
+        public async Task<IList<Weapon>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await this._context.Weapons.ToListAsync();
         }
 
-        public Task SaveOne(Selfie item)
+        public Task SaveOne(Weapon item)
         {
             throw new NotImplementedException();
         }
